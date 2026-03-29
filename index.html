@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Poster - Conference 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --gradient-1: #1e293b;
+            --gradient-2: #0f172a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e2e8f0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .poster-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* A0 Aspect Ratio Simulation (1:1.414) */
+        .poster-content {
+            aspect-ratio: 1/1.414;
+            padding: 60px;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            position: relative;
+        }
+        
+        .geometric-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .geometric-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        .geometric-bg::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            border: 2px solid rgba(59, 130, 246, 0.1);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gradient-1) 100%);
+            color: white;
+            padding: 50px;
+            margin: -60px -60px 40px -60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.1;
+            background-image: 
+                linear-gradient(30deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%, #ffffff),
+                linear-gradient(150deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%, #ffffff),
+                linear-gradient(30deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%, #ffffff),
+                linear-gradient(150deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%, #ffffff),
+                linear-gradient(60deg, #ffffff77 25%, transparent 25.5%, transparent 75%, #ffffff77 75%, #ffffff77),
+                linear-gradient(60deg, #ffffff77 25%, transparent 25.5%, transparent 75%, #ffffff77 75%, #ffffff77);
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+        }
+        
+        .title-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-top: 15px;
+            font-weight: 300;
+        }
+        
+        .authors {
+            margin-top: 25px;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+        
+        .author-name {
+            display: inline-block;
+            margin-right: 20px;
+            position: relative;
+        }
+        
+        .author-name::after {
+            content: '•';
+            margin-left: 20px;
+            opacity: 0.5;
+        }
+        
+        .author-name:last-child::after {
+            display: none;
+        }
+        
+        .affiliation {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent), #8b5cf6);
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .section-content {
+            color: #475569;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin: 20px 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-top: 5px;
+        }
+        
+        .methodology-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 25px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .flow-step {
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+            padding: 20px 15px;
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .flow-step:hover {
+            border-color: var(--accent);
+            background: #eff6ff;
+        }
+        
+        .flow-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 200px;
+            gap: 15px;
+            padding: 20px 0;
+        }
+        
+        .bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .bar {
+            width: 100%;
+            background: linear-gradient(to top, var(--accent), #60a5fa);
+            border-radius: 6px 6px 0 0;
+            transition: all 0.3s ease;
+            position: relative;
+            min-height: 20px;
+        }
+        
+        .bar:hover {
+            opacity: 0.8;
+            transform: scaleY(1.05);
+        }
+        
+        .bar-label {
+            font-size: 0.85rem;
+            color: #64748b;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .conclusion-banner {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--gradient-1) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .conclusion-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .qr-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border: 2px dashed #cbd5e1;
+        }
+        
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .qr-code::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border: 3px solid white;
+            border-radius: 4px;
+        }
+        
+        .qr-code::after {
+            content: '';
+            position: absolute;
+            width: 40%;
+            height: 40%;
+            background: white;
+            border-radius: 2px;
+        }
+        
+        .qr-text {
+            flex: 1;
+        }
+        
+        .qr-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .qr-subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .footer-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        .contact-item i {
+            color: var(--accent);
+        }
+        
+        .logo-placeholder {
+            width: 120px;
+            height: 50px;
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .poster-container {
+                box-shadow: none;
+                max-width: none;
+            }
+            
+            .section-card {
+                break-inside: avoid;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+        }
+        
+        /* Interactive Elements */
+        .interactive-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .interactive-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.5);
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: var(--primary);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+            z-index: 100;
+        }
+        
+        /* Responsive adjustments for viewing on screen */
+        @media (max-width: 1200px) {
+            .poster-content {
+                aspect-ratio: auto;
+                min-height: 100vh;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .title-text {
+                font-size: 2.5rem;
+            }
+        }
+        
+        .highlight-text {
+            background: linear-gradient(120deg, #dbeafe 0%, #dbeafe 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 88%;
+            padding: 0 4px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .bullet-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .bullet-list li {
+            padding-left: 28px;
+            position: relative;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        .bullet-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Print Button -->
+    <button class="interactive-btn no-print" onclick="window.print()" title="Print Poster">
+        <i class="fas fa-print"></i>
+    </button>
+
+    <div class="poster-container">
+        <div class="poster-content">
+            <!-- Background Effects -->
+            <div class="geometric-bg"></div>
+            
+            <!-- Header -->
+            <header class="header-section">
+                <div class="header-pattern"></div>
+                <h1 class="title-text">Advanced Machine Learning Approaches for Climate Prediction Modeling</h1>
+                <p class="subtitle">Leveraging Deep Neural Networks and Ensemble Methods for Improved Accuracy</p>
+                
+                <div class="authors">
+                    <span class="author-name">Dr. Sarah Chen</span>
+                    <span class="author-name">Prof. Michael Rodriguez</span>
+                    <span class="author-name">Dr. Emily Watson</span>
+                    <span class="author-name">James Park, PhD Candidate</span>
+                </div>
+                
+                <div class="affiliation">
+                    Department of Computer Science & Climate Research Institute, Stanford University
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <div class="content-grid">
+                <!-- Left Column -->
+                <div class="column">
+                    <!-- Abstract -->
+                    <section class="section-card">
+                        <h2 class="section-title">
+                            <div class="section-icon"><i class="fas fa-file-alt"></i></div>
+                            Abstract
+                        </h2>
+                        <div class="section-content">
+                            <p>
+                                This study presents a <span class="highlight-text">novel ensemble architecture</span> combining Convolutional Neural Networks (CNN) with Transformer models to predict regional climate patterns with unprecedented accuracy. Our approach addresses critical limitations in traditional numerical weather prediction by incorporating attention mechanisms that capture long-range spatial dependencies.
+                            </p>
+                            <div class="highlight-box">
+                                <strong>Key Innovation:</strong> First application of Vision Transformers (ViT) to multi-scale climate data fusion, achieving 23% improvement over existing baselines.
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Introduction -->
+                    <section class="section-card">
+                        <h2 class="section-title">
+                            <div class="section-icon"><i class="fas fa-lightbulb"></i></div>
+                            Introduction
+                        </h2>
+                        <div class="section-content">
+                            <p style="margin-bottom: 15px;">
+                                Climate prediction remains one of the most challenging computational problems due to:
+                            </p>
+                            <ul class="bullet-list">
+                                <li>High-dimensional, non-linear atmospheric dynamics</li>
+                                <li>Multi-scale interactions (local to global)</li>
+                                <li>Uncertainty quantification requirements</li>
+                                <li>Computational constraints for real-time forecasting</li>
+                            </ul>
+                            <p style="margin-top: 15px;">
+                                Traditional physics-based models (GCMs) require immense computational resources, while pure ML approaches often lack physical consistency.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Methodology -->
+                    <section class="section-card">
+                        <h2 class="section-title">
+                            <div class="section-icon"><i class="fas fa-cogs"></i></div>
+                            Methodology
+                        </h2>
+                        <div class="section-content">
+                            <p style="margin-bottom: 20px;">Our hybrid approach follows a three-stage pipeline:</p>
+                            
+                            <div class="methodology-flow">
+                                <div class="flow-step">
+                                    <div class="step-number">1</div>
+                                    <div style="font-weight: 600; color: var(--primary); font-size: 0.9rem;">Data Fusion</div>
+                                    <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Multi-source Integration</div>
+                                </div>
+                                <div class="flow-step">
+                                    <div class="step-number">2</div>
+                                    <div style="font-weight: 600; color: var(--primary); font-size: 0.9rem;">Feature Extraction</div>
+                                    <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">CNN + ViT Hybrid</div>
+                                </div>
+                                <div class="flow-step">
+                                    <div class="step-number">3</div>
+                                    <div style="font-weight: 600; color: var(--primary); font-size: 0.9rem;">Ensemble Prediction</div>
+                                    <div style="font-size: 0.8rem; color: #64748b; margin-top: 5px;">Uncertainty Quantification</div>
+                                </div>
+                            </div>
+
+                            <div class="highlight-box">
+                                <strong>Architecture:</strong> ResNet-152 backbone with 8-head self-attention, trained on 40 years of ERA5 reanalysis data (0.25° resolution).
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Key Statistics -->
+                    <section class="section-card">
+                        <h2 class="section-title">
+                            <div class="section-icon"><i class="fas fa-chart-bar"></i></div>
+                            Dataset Characteristics
+                        </h2>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">40</span>
+                                <div class="stat-label">Years of Data</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">2.5B</span>
+                                <div class="stat-label">Data Points</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">0.25°</span>
+                                <div class="stat-label">Spatial Resolution</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right Column -->
+                <div class="column">
+                    <!-- Results -->
+                    <section class="section-card">
+                        <h2 class="section-title">
+                            <div class="section-icon"><i class="fas fa-chart-line"></i></div>
+                            Results & Performance
+                        </h2>
+                        <div class="section-content">
+                            <p style="margin-bottom: 15px;">
+                                Comparative analysis against state-of-the-art baselines demonstrates superior performance across all metrics:
+                            </p>
+                            
+                            <div class="chart-container">
+                                <div style="text-align: center; font-weight: 600; color: var(--primary); margin-bottom: 15px;">RMSE Comparison (Lower is Better)</div>
+                                <div class="bar-chart">
+                                    <div class="bar-item">
+                                        <div class="bar" style="height: 60%;" title="2.45"></div>
+                                        <div class="bar-label">Persistence</div>
+                                        <div style="font-size: 0.8rem; color: var(--accent); font-weight: 600;">2.45</div>
+                                    </div>
+                                    <div class="bar-item">
+                                        <div class="bar" style="height: 45%;" title="1.82"></div>
+                                        <div class="bar-label">CNN-LSTM</div>
+                                        <div style="font-size: 0.8rem; color: var(--accent); font-weight: 600;">1.82</div>
+                                    </div>
+                                    <div class="bar-item">
+                                        <div class="bar" style="height: 35%;" title="1.45"></div>
+                                        <div class="bar-label">Graph Nets</div>
+                                        <div style="font-size: 0.8rem; color: var(--accent); font-weight: 600;">1.45</div>
+                                    </div>
+                                    <div class="bar-item">
+                                        <div class="bar" style="height: 25%; background: linear-gradient(to top, #10b981, #34d399);" title="0.98"></div>
+                                        <div class="bar-label" style="color: #059669; font-weight: 700;">Our Model</div>
+                                        <div style="font-size: 0.8rem; color: #059669; font-weight: 700;">0.98</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="highlight-box" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-left-color: #10b981;">
+                                <strong style="color: #059669;">Breakthrough:</strong> 32% reduction in RMSE compared to previous SOTA, with inference time under 100ms for 7-day forecasts.
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Discussion -->
+                    <section class="section-card">
+                        <h2 class="section-title">
+                            <div class="section-icon"><i class="fas fa-comments"></i></div>
+                            Discussion
+                        </h2>
+                        <div class="section-content">
+                            <p style="margin-bottom: 15px;">
+                                The attention mechanism successfully captures teleconnections between distant climate phenomena, enabling:
+                            </p>
+                            <ul class="bullet-list">
+                                <li>Improved prediction of extreme weather events 14 days in advance</li>
+                                <li>Physical consistency constraints via differentiable physics layers</li>
+                                <li>Uncertainty quantification through Monte Carlo Dropout</li>
+                            </ul>
+                            <p style="margin-top: 15px;">
+                                <span class="highlight-text">Limitations:</span> Current model requires significant computational resources for training (512 V100 GPU hours). Edge deployment optimization is ongoing work.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Conclusion -->
+                    <section class="section-card" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+                        <div class="conclusion-banner">
+                            <h2 style="font-family: 'Space Grotesk', sans-serif; font-size: 1.8rem; margin-bottom: 15px; display: flex; align-items: center; gap: 12px;">
+                                <i class="fas fa-flag-checkered"></i>
+                                Conclusion
+                            </h2>
+                            <p style="font-size: 1.1rem; line-height: 1.6; opacity: 0.95;">
+                                We demonstrate that hybrid physics-ML architectures can outperform traditional methods while maintaining physical plausibility. Our open-source framework provides a foundation for next-generation operational weather forecasting systems.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- QR Code / References -->
+                    <section class="section-card">
+                        <h2 class="section-title">
+                            <div class="section-icon"><i class="fas fa-book"></i></div>
+                            References & Resources
+                        </h2>
+                        <div class="qr-section">
+                            <div class="qr-code">
+                                <i class="fas fa-qrcode" style="z-index: 1;"></i>
+                            </div>
+                            <div class="qr-text">
+                                <div class="qr-title">Access Full Paper & Code</div>
+                                <div class="qr-subtitle">github.com/climate-ml-research/ensemble-vit</div>
+                                <div style="margin-top: 8px; font-size: 0.8rem; color: #94a3b8;">
+                                    Scan to view interactive results and download dataset
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section-content" style="margin-top: 15px; font-size: 0.9rem;">
+                            <p style="margin-bottom: 8px;"><strong>[1]</strong> Chen et al. (2025). "Attention Mechanisms in Climate Modeling." <em>Nature Climate Change</em>.</p>
+                            <p style="margin-bottom: 8px;"><strong>[2]</strong> Rodriguez & Watson (2024). "Ensemble Methods for Weather Prediction." <em>J. Computational Physics</em>.</p>
+                            <p><strong>[3]</strong> Park et al. (2026). "Differentiable Physics for ML." <em>ICML</em>.</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="footer-section">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>s.chen@stanford.edu</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-globe"></i>
+                        <span>climateml.stanford.edu</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-hashtag"></i>
+                        <span>#ClimateML2026</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <div class="logo-placeholder">NSF</div>
+                    <div class="logo-placeholder">NASA</div>
+                    <div class="logo-placeholder">Stanford</div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive hover effects for bars
+        document.querySelectorAll('.bar').forEach(bar => {
+            bar.addEventListener('mouseenter', function(e) {
+                const value = this.getAttribute('title');
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = 'RMSE: ' + value;
+                document.body.appendChild(tooltip);
+                
+                const rect = this.getBoundingClientRect();
+                tooltip.style.left = rect.left + rect.width/2 - tooltip.offsetWidth/2 + 'px';
+                tooltip.style.top = rect.top - 30 + 'px';
+                tooltip.style.opacity = '1';
+                
+                this._tooltip = tooltip;
+            });
+            
+            bar.addEventListener('mouseleave', function() {
+                if (this._tooltip) {
+                    this._tooltip.remove();
+                    this._tooltip = null;
+                }
+            });
+        });
+
+        // Smooth scroll for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add parallax effect to geometric background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.geometric-bg');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
